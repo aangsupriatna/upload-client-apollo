@@ -5,15 +5,14 @@ import App from './App'
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import { createUploadLink } from 'apollo-upload-client';
 
-const createApolloClient = (cache = {}) =>
+const createApolloClient = () =>
   new ApolloClient({
-    ssrMode: typeof window === 'undefined',
-    cache: new InMemoryCache().restore(cache),
+    cache: new InMemoryCache(),
     link: createUploadLink({ uri: "http://localhost:4000/" }),
   });
 
 const cache = new InMemoryCache();
-const client = createApolloClient(cache)
+const client = createApolloClient();
 
 ReactDOM.render(
   <React.StrictMode>
